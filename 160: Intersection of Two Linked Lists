@@ -1,0 +1,22 @@
+struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB) {
+    struct ListNode *ptra=headA;
+    struct ListNode *ptrb=headB;
+     if(!headA||!headB){
+        return NULL;
+    }
+  
+    while(ptra!=ptrb){
+    if(ptra==NULL){
+        ptra=headB;
+    }
+    else{
+    ptra=ptra->next;}
+
+if(ptrb==NULL){
+    ptrb=headA;
+}
+else{
+    ptrb=ptrb->next;
+}}
+return ptra;
+}
