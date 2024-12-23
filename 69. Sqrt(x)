@@ -1,0 +1,16 @@
+int mySqrt(int x) {
+   double a;
+   double p=0.00001;
+   double b;
+   double d;
+   a=x/2.0;
+   if(x==0 || x==1){
+    return x;
+   }
+   do{
+   b=(a+(x/a))/2.0;
+   d=b-a;
+   a=b;}
+   while(d>p || d<-p);
+    return (int)a;
+}
