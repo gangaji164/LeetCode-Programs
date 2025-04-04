@@ -1,0 +1,50 @@
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+#define MAX_SIZE 1000
+int* topKFrequent(int* nums, int numsSize, int k, int* returnSize) {
+    int* ele = (int*)malloc(numsSize * sizeof(int));  
+    int* fre = (int*)malloc(numsSize * sizeof(int));
+    int unicount=0;
+    int temp;
+    for(int i=0;i<numsSize;i++){
+    int current=nums[i];
+    int iscount=0;
+    for(int j=0;j<unicount;j++){
+    if (ele[j]==current){
+        iscount=1;
+        break;
+    }
+        }
+    if (iscount) continue;
+    int count=0;
+    for(int j=0;j<numsSize;j++){
+        if(nums[j]==current){
+            count++;
+    }
+        }
+    ele[unicount]=current;
+    fre[unicount]=count;
+    unicount++;
+    }
+    for(int i=0;i<unicount-1;i++){
+        for(int j=i+1;j<unicount;j++){
+            if(fre[j]>fre[i]){
+            temp=fre[j];
+            fre[j]=fre[i];
+            fre[i]=temp;
+
+            int tempi=ele[j];
+            ele[j]=ele[i];
+            ele[i]=tempi;
+
+        }
+    }
+} 
+*returnSize =(k<unicount)?k:unicount;
+int *result=(int*)malloc(*returnSize*sizeof(int));
+for(int i=0;i<*returnSize;i++){
+    result[i]=ele[i];
+}
+return result;
+}
