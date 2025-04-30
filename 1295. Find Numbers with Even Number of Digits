@@ -1,0 +1,19 @@
+int cd(int num){
+    int count=0;
+    while(num!=0){
+        num/=10;
+        count++;
+    }
+    return count;
+
+}
+int findNumbers(int* nums, int numsSize) {
+    int evencount=0;
+    for (int i=0;i<numsSize;i++){
+        
+        if(cd(nums[i])%2==0){
+            evencount++;
+        }
+    }
+    return evencount;
+}
