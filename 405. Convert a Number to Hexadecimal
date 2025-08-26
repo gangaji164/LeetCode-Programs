@@ -1,0 +1,19 @@
+class Solution {
+public:
+    string toHex(int num) {
+       
+        if(num==0){
+            return "0";
+        }
+        string result="";
+        unsigned int n=num;
+        string hex_chars="0123456789abcdef";
+        while(n>0){
+            int remainder=n%16;
+            result.push_back(hex_chars[remainder]);
+            n/=16;
+        }
+        reverse(result.begin(),result.end());
+        return result;
+    }
+};
