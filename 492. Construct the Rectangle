@@ -1,0 +1,23 @@
+class Solution {
+public:
+    vector<int> constructRectangle(int area) {
+        vector<int>result;
+        int l=area,w=1;
+        int diff=area-1;
+        for(int i=1;i<=area;i++){
+            if(area%i==0){
+                int len=area/i;
+                if(len>=i){
+                    if((len-i)<diff){
+                        l=len;
+                        w=i;
+                        diff=len-i;
+                    }
+
+                }
+            }
+        }
+        return{l,w};
+
+    }
+};
