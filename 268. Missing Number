@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int missingNumber(vector<int>& nums) {
+        sort(nums.begin(),nums.end());
+        int n=nums.size();
+        int m=0;
+        int total=0;
+        int c=0;
+        for(int i=0;i<=n;i++){
+            total+=i;
+        }
+        for(int i=0;i<nums.size();i++){
+          m+=nums[i];
+        }
+        c=total-m;
+        return c;
+       
+    }
+};
