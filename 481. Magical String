@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int magicalString(int n) {
+       
+        vector<int>s(n+2);
+        if(n==0) return 0;
+        if(n<=3) return 1;
+        s[0]=1;
+        s[1]=2;
+        s[2]=2;
+        int head=2;
+        int tail=3;
+        int c=1;
+        int count=1;
+
+        while(tail < n){
+            int r=s[head];
+            for(int j=0;j<r && tail < n;j++){
+                s[tail++]=c;
+                if(c==1) count++;
+            }
+                c=3-c;
+                head++;
+            
+        }
+        
+        return count;
+    }
+};
