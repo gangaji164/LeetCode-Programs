@@ -1,0 +1,26 @@
+#include<algorithm>
+class Solution {
+public:
+    int minEatingSpeed(vector<int>& piles, int h) {
+        sort(piles.begin(),piles.end());
+        int i=1;
+        int j= piles.back();
+        int mini=j;
+        while(i<=j){
+            long long total=0;
+       long long mid=i+(j-i)/2;
+       for(int k=0;k<piles.size();k++){
+        total+=(piles[k]+mid-1)/mid;
+       }
+        if(total<=h){
+            mini=mid;
+            j=mid-1;
+        }
+        else{
+            i=mid+1;
+        }
+        
+        }
+        return mini;
+    }
+};
