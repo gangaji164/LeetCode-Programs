@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> findErrorNums(vector<int>& nums) {
+        int n=nums.size();
+        vector<int>count(n+1,0);
+        int dup=-1,mis=-1;
+        for(int num:nums){
+            count[num]++;
+            if(count[num]==2)dup=num;
+        }
+        for(int i=1;i<=n;i++){
+            if(count[i]==0){
+                mis=i;
+                break;
+
+            }
+        }
+        return{dup,mis};
+    }
+};
