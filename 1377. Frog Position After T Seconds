@@ -1,0 +1,64 @@
+class Solution {
+public:
+    double frogPosition(int n, vector<vector<int>>& edges, int t, int target) {
+
+        vector<vector<int>>g(n+1);
+        for(int i=0;i<edges.size();i++){
+            int a=edges[i][0];
+            int b=edges[i][1];
+            g[a].push_back(b);
+            g[b].push_back(a);
+        }
+        queue<pair<int,double>> q;
+        vector<int>visited(n+1,0);
+        q.push({1,1.0});
+        visited[1]=1;
+        
+
+        while(!q.empty() && t--){
+            int size=q.size();
+
+
+            for(int i=0;i<size;i++){
+                int node=q.front().first;
+                double prob=q.front().second;
+                q.pop();
+            
+
+          
+        int unvis=0;
+        for(int j=0;j<g[node].size();j++){
+            int next=g[node][j];
+            if(!visited[next]){
+                unvis++;
+            }
+
+        }
+
+        if(unvis==0){
+            q.push({node,prob});
+            continue;
+        }
+        for(int j=0;j<g[node].size();j++){
+            int next=g[node][j];
+            if(!visited[next]){
+                visited[next]=1;
+                q.push({next,prob/unvis});
+            }
+        }
+
+        }
+        }
+
+        while(!q.empty()){
+            int node=q.front().first;
+            double prob=q.front().second;
+            q.pop();
+
+            if(node==target){
+                return prob;
+            }
+        }
+        return 0.0;
+    }
+};
