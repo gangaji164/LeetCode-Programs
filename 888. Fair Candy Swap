@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> fairCandySwap(vector<int>& aliceSizes, vector<int>& bobSizes) {
+        int suma=0,sumb=0;
+        for(int i=0;i<aliceSizes.size();i++){
+            suma+=aliceSizes[i];
+        }
+        for(int j=0;j<bobSizes.size();j++){
+            sumb+=bobSizes[j];
+        }
+
+        int d=(sumb-suma)/2;
+        unordered_set<int>setb;
+        for(int j=0;j<bobSizes.size();j++){
+            setb.insert(bobSizes[j]);
+        }
+        for(int i=0;i<aliceSizes.size();i++){
+            int target=aliceSizes[i]+d;
+            if(setb.count(target)){
+                return{aliceSizes[i],target};
+            }
+        }
+        return{};
+    }
+};
