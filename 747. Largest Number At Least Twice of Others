@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int dominantIndex(vector<int>& nums) {
+        int maxval=-1,secondmax=-1;
+        int index=-1;
+        for(int i=0;i<nums.size();i++){
+            if(nums[i]>maxval){
+                secondmax=maxval;
+                maxval=nums[i];
+                index=i;
+            }
+            else if(nums[i]>secondmax){
+                secondmax=nums[i];
+            }
+
+        }
+        if(maxval>=2*secondmax){
+            return index;
+        }
+        return -1;
+    }
+};
