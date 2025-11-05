@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int numOfSubarrays(vector<int>& arr, int k, int threshold) {
+        int t=k*threshold;
+        int windsum=0;
+        int count=0;
+        for(int i=0;i<k;i++){
+            windsum+=arr[i];
+        }
+        if(windsum>=t){
+            count++;
+        }
+        for(int i=k;i<arr.size();i++){
+            windsum+=arr[i]-arr[i-k];
+            if(windsum>=t) count++;
+        }
+        return count;
+    }
+};
