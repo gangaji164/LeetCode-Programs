@@ -1,0 +1,14 @@
+class Solution(object):
+    def arrayRankTransform(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: List[int]
+        """
+        s=sorted(set(arr))
+        rank={}
+        for i,val in enumerate(s):
+            rank[val]=i+1
+
+        return[rank[x] for x in arr]
+
+        
