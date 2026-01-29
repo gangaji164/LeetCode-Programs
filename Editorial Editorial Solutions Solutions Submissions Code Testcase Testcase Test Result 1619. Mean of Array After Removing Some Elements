@@ -1,0 +1,11 @@
+class Solution(object):
+    def trimMean(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: float
+        """
+        arr.sort() 
+        re=len(arr)//20
+        rem=arr[re:len(arr)-re]
+        return sum(rem)/float(len(rem))
+        
