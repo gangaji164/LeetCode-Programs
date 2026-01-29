@@ -1,0 +1,22 @@
+class Solution(object):
+    def suggestedProducts(self, products, searchWord):
+        """
+        :type products: List[str]
+        :type searchWord: str
+        :rtype: List[List[str]]
+        """
+        products.sort()
+        res=[]
+        pre=""
+        for ch in searchWord:
+            pre+=ch
+            sugg=[]
+            for p in products:
+                if p.startswith(pre):
+                    sugg.append(p)
+                if len(sugg)==3:
+                    break
+            res.append(sugg)
+        return res
+
+        
