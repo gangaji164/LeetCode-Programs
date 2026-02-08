@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int minimumCost(int m, int n, vector<int>& horizontalCut, vector<int>& verticalCut) {
+        sort(horizontalCut.rbegin(),horizontalCut.rend());
+        sort(verticalCut.rbegin(),verticalCut.rend());
+
+        int h=0,v=0;
+        int hp=1,vp=1;
+        int tc=0;
+        while(h<horizontalCut.size() && v<verticalCut.size()){
+            if(horizontalCut[h]>verticalCut[v]){
+                tc+=horizontalCut[h]*vp;
+                hp++;
+                h++;
+            }
+            else{
+                tc+=verticalCut[v]*hp;
+                vp++;
+                v++;
+            }
+        }
+        while(h<horizontalCut.size()){
+            tc+=horizontalCut[h]*vp;
+                hp++;
+                h++;
+        }
+        while( v<verticalCut.size()){
+             tc+=verticalCut[v]*hp;
+                vp++;
+                v++;
+        }
+        return tc;
+    }
+};
