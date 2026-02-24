@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int removeStones(vector<vector<int>>& stones) {
+        int component=0;
+        int n=stones.size();
+        vector<bool> visited(n,false);
+        for(int i=0;i<stones.size();i++){
+            if(!visited[i]){
+                dfs(i,stones,visited);
+                component++;
+            }
+
+        }
+        return n-component;
+    }
+    void dfs(int i,vector<vector<int>>& stones, vector<bool> &visited){
+        visited[i]=true;
+
+        for(int j=0;j<stones.size();j++){
+            if(!visited[j]){
+            if(stones[i][0]==stones[j][0] || stones[i][1]==stones[j][1]){
+             dfs(j,stones,visited);   
+            }
+            }
+        }
+    }
+};
