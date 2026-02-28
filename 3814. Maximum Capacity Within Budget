@@ -1,0 +1,51 @@
+
+class Solution {
+public:
+    vector<int> tree;
+    void update(int curr ,int l, int r, int x, int val)
+    {
+        if(l==r)
+        {
+            tree[curr]=max(tree[curr],val);
+            return;
+        }
+        int m=l+(r-l)/2;
+        if(x<=m)
+        {
+            update(curr*2+1,l,m,x,val);
+        }
+        else update(curr*2+2,m+1,r,x,val);
+        tree[curr]=max(tree[curr*2+1],tree[curr*2+2]);
+    }
+    int query(int curr ,int l, int r,int x, int y)
+    {
+        if(r<x || l> y) return 0;
+        if(x<=l && r<=y) return tree[curr];
+        int m=l+(r-l)/2;
+        return max(query(curr*2+1,l,m,x,y),query(curr*2+2,m+1,r,x,y));
+    }
+    int maxCapacity(vector<int>& costs, vector<int>& capacity, int budget) {
+        int n=costs.size();
+        int m=0;
+        for(int i=0; i< costs.size(); i++)
+        {
+            m=max(m,costs[i]);
+        }
+        tree.resize((m+1)*4);
+        
+        int ans=0;
+        for(int i=0; i< costs.size(); i++)
+        {
+            if(budget>costs[i])
+            {
+                //cout<<capacity[i]<<' '<<budget-costs[i]<<' '<<query(0,0,m-1,0,budget-costs[i]-1)<<'\n';
+                //cout<<query(0,0,m-1,0,budget-costs[i]-1)<<'\n';
+                ans=max(ans,capacity[i]+query(0,0,m,0,budget-costs[i]-1));
+            }
+            update(0,0,m,costs[i],capacity[i]);
+        }
+        return ans;
+        
+        
+    }
+};
