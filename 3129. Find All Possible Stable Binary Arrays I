@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int MOD = 1e9+7;
+    
+    int dp[201][201][2];
+    
+    int solve(int z,int o,int last,int zero,int one,int limit){
+        
+        if(z>zero || o>one) return 0;
+        if(z==zero && o==one) return 1;
+        
+        if(dp[z][o][last]!=-1) return dp[z][o][last];
+        
+        long long ans=0;
+        
+        for(int i=1;i<=limit;i++){
+            
+            if(last==1 && z+i<=zero)
+                ans=(ans+solve(z+i,o,0,zero,one,limit))%MOD;
+                
+            if(last==0 && o+i<=one)
+                ans=(ans+solve(z,o+i,1,zero,one,limit))%MOD;
+        }
+        
+        return dp[z][o][last]=ans;
+    }
+    
+    int numberOfStableArrays(int zero, int one, int limit) {
+        memset(dp,-1,sizeof(dp));
+        
+        return (solve(0,0,0,zero,one,limit) + 
+                solve(0,0,1,zero,one,limit)) % MOD;
+    }
+};
