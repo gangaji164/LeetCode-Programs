@@ -1,0 +1,34 @@
+class Solution {
+public:
+    long long maxHeight(long long time, int w){
+        long long l = 0, r = 1e6;
+        while(l <= r){
+            long long m = (l+r)/2;
+            long long t = (long long)w * m * (m+1) / 2;
+            if(t <= time) l = m+1;
+            else r = m-1;
+        }
+        return r;
+    }
+
+    long long minNumberOfSeconds(int mountainHeight, vector<int>& workerTimes) {
+        long long l = 1, r = 1e18, ans = r;
+
+        while(l <= r){
+            long long mid = (l+r)/2;
+            long long total = 0;
+
+            for(int w : workerTimes){
+                total += maxHeight(mid, w);
+            }
+
+            if(total >= mountainHeight){
+                ans = mid;
+                r = mid-1;
+            }
+            else l = mid+1;
+        }
+
+        return ans;
+    }
+};
