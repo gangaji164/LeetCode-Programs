@@ -1,0 +1,17 @@
+class Solution {
+public:
+    auto constructProductMatrix(vector<vector<int>>& g) {
+        static int p[100'001];
+
+        int i = 0;
+        for (long t{1}; auto x : g | views::join) {
+            p[i++] = exchange(t, (t * x) % 12345);
+        }
+
+        for (long t{1}; auto& x : g | views::join | views::reverse) {
+            x = (p[--i] * exchange(t, (t * x) % 12345)) % 12345;
+        }
+
+        return move(g);
+    }
+};
