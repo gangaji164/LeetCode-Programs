@@ -1,0 +1,32 @@
+from collections import defaultdict, deque
+
+
+class Solution:
+    def makeConnected(self, n: int, connections: List[List[int]]) -> int:
+        if len(connections)<n-1:
+            return -1
+        graph = defaultdict(list)
+
+        # Build graph
+        for u, v in connections:
+            graph[u].append(v)
+            graph[v].append(u)
+
+        visited = set()
+        component=0
+
+        # BFS traversal
+        for node in range(n):
+            if node not in visited:
+                queue = deque([node])
+                visited.add(node)
+                while queue:
+                    curr = queue.popleft()
+                    for neighbor in graph[curr]:
+                        if neighbor not in visited:
+                            visited.add(neighbor)
+                            queue.append(neighbor)
+                component+=1
+
+
+        return component-1
